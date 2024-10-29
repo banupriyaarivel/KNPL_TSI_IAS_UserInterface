@@ -1,0 +1,366 @@
+<mvc:View
+    displayBlock="true"
+    controllerName="knpltsiiasfrontend.controller.Detail"
+    height="100%"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+>
+    <!-- Main Object Page Layout with Header and Sections -->
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+    >
+        <!-- Header Title displaying user name and profile image -->
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle id="oDynamicHeader">
+                <!-- Expanded and snapped heading for user's full name -->
+                <expandedHeading>
+                    <m:Title
+                        text="{parts: [{path: 'USERS_DATA>FIRST_NAME'}, {path: 'USERS_DATA>LAST_NAME'}], formatter: '.formatter.fullName'}"
+                        wrapping="true"
+                        class="sapUiSmallMarginEnd"
+                    />
+                </expandedHeading>
+                <snappedHeading>
+                    <m:FlexBox
+                        wrap="Wrap"
+                        fitContainer="true"
+                        alignItems="Center"
+                    >
+                        <m:FlexBox
+                            wrap="NoWrap"
+                            fitContainer="true"
+                            alignItems="Center"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <m:Avatar
+                                src="{USERS_DATA>PROFILE_IMAGE}"
+                                displaySize="S"
+                                displayShape="Square"
+                            />
+                            <m:Title
+                                text="{parts: [{path: 'USERS_DATA>FIRST_NAME'}, {path: 'USERS_DATA>LAST_NAME'}], formatter: '.formatter.fullName'}"
+                                wrapping="true"
+                                class="sapUiMediumMarginBegin"
+                            />
+                        </m:FlexBox>
+                    </m:FlexBox>
+                </snappedHeading>
+
+                <!-- Action buttons in the header (e.g., Close button) -->
+                <actions>
+                    <m:Button
+                        text="close"
+                        type="Emphasized"
+                        press="handleClose"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <!-- Header Content with user profile details -->
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch"
+            >
+                <m:Avatar
+                    src="{USERS_DATA>PROFILE_IMAGE}"
+                    displaySize="L"
+                    displayShape="Square"
+                    class="sapUiSmallMargin"
+                />
+                <!-- Email, Last Login, and Created At information -->
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMargin"
+                >
+                    <m:Label text="Email" />
+                    <m:Text
+                        text="{path: 'USERS_DATA>EMAIL', formatter: '.formatter.nullState'}"
+                    />
+                </m:VBox>
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMargin"
+                >
+                    <m:Label text="Last Login" />
+                    <m:Text
+                        text="{path: 'USERS_DATA>LAST_LOGIN_AT', formatter: '.formatter.nullState'}"
+                    />
+                </m:VBox>
+                <m:VBox
+                    justifyContent="Center"
+                    class="sapUiSmallMargin"
+                >
+                    <m:Label text="Created At" />
+                    <m:Text
+                        text="{path: 'USERS_DATA>CREATED_AT', formatter: '.formatter.nullState'}"
+                    />
+                </m:VBox>
+            </m:FlexBox>
+        </headerContent>
+
+        <!-- Section: User Identification -->
+        <sections>
+            <ObjectPageSection
+                id="userIdentification"
+                title="User Identification"
+            >
+                <!-- User ID and Employee ID details -->
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <form:content>
+                                    <m:Label text="User ID" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>ID', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Employee ID" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>EMPLOYEE_CODE', formatter: '.formatter.nullState'}"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <!-- Section: Personal Information -->
+            <ObjectPageSection
+                id="personalInfo"
+                title="Personal Information"
+            >
+                <!-- Details like First Name, Last Name, Email, and Mobile -->
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <form:content>
+                                    <m:Label text="First Name" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>FIRST_NAME', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Last Name" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>LAST_NAME', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Email" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>EMAIL', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Mobile" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>MOBILE', formatter: '.formatter.nullState'}"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <!-- Section: Employment Details -->
+            <ObjectPageSection
+                id="employeeDetails"
+                title="Employment Details"
+            >
+                <!-- Employment-specific details like Designation, Zone, Division Identifier, and Manager -->
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <form:content>
+                                    <m:Label text="Designation" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>DESIGNATION', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Zone" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>ZONE', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Division Identifier" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>DIVISION_IDENTIFIER', formatter: '.formatter.nullState'}"
+                                    />
+                                    <m:Label text="Manager" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>MANAGER', formatter: '.formatter.nullState'}"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <!-- Section: Status -->
+            <ObjectPageSection
+                id="status"
+                title="Status"
+            >
+                <!-- User status information including archived and activation status with status icon -->
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <form:content>
+                                    <m:Label text="Is Archived" />
+                                    <m:HBox
+                                        alignItems="Center"
+                                        justifyContent="Start"
+                                    >
+                                        <m:Text
+                                            text="{= parseInt(${USERS_DATA>IS_ARCHIVED}, 10) === 1 ? 'Yes' : 'No'}"
+                                            class="sapUiTinyMargin"
+                                        />
+                                        <m:ObjectStatus
+                                            icon="{path: 'USERS_DATA>IS_ARCHIVED', formatter: '.formatter.statusIcon'}"
+                                            state="{path: 'USERS_DATA>IS_ARCHIVED', formatter: '.formatter.statusState'}"
+                                        />
+                                    </m:HBox>
+                                    <m:Label text="Is Activated" />
+                                    <m:HBox
+                                        alignItems="Center"
+                                        justifyContent="Start"
+                                    >
+                                        <m:Text
+                                            text="{= parseInt(${USERS_DATA>IS_ACTIVATED}, 10) === 1? 'Yes' : 'No'}"
+                                            class="sapUiTinyMargin"
+                                        />
+                                        <m:ObjectStatus
+                                            icon="{path: 'USERS_DATA>IS_ACTIVATED', formatter: '.formatter.statusIcon'}"
+                                            state="{path: 'USERS_DATA>IS_ACTIVATED', formatter: '.formatter.statusState'}"
+                                        />
+                                    </m:HBox>
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <!-- section: Logs Information -->
+            <ObjectPageSection
+                id="logsInfo"
+                title="Logs Information"
+            >
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <form:content>
+                                    <m:Label text="Created At" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>CREATED_AT', formatter: '.formatter.nullState'}"
+                                    />
+
+                                    <m:Label text="Last Login" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>LAST_LOGIN_AT', formatter: '.formatter.nullState'}"
+                                    />
+
+                                    <m:Label text="Updated At" />
+                                    <m:Text
+                                        text="{path: 'USERS_DATA>UPDATED_AT', formatter: '.formatter.nullState'}"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <!-- section: More Info like TSI Details -->
+            <ObjectPageSection
+                id="Butoons"
+                title="More Info"
+            >
+                <ObjectPageSubSection>
+                    <blocks>
+                        <m:VBox>
+                            <m:HBox
+                                fitContainer="true"
+                                alignItems="Center"
+                                justifyContent="Start"
+                                class="sapUiSmallMargin"
+                            >
+                                <m:Label text="TSI : " />
+                                <m:Switch
+                                    id="toggleBtn"
+                                    type="AcceptReject"
+                                    change="groupToggle"
+                                    state="false"
+                                />
+                            </m:HBox>
+                            <m:HBox
+                                fitContainer="true"
+                                alignItems="Center"
+                                justifyContent="Start"
+                                class="sapUiSmallMargin"
+                            >
+                                <!-- <m:Label text="Pragathi : " />
+                                <m:Switch
+                                    id="toggleBtn2"
+                                    type="AcceptReject"
+                                    change="groupToggle"
+                                    state="false"
+                                /> -->
+                            </m:HBox>
+                        </m:VBox>
+                    </blocks>
+                </ObjectPageSubSection>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

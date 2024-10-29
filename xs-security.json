@@ -1,0 +1,29 @@
+{
+  "xsappname": "knpltsiiasfrontend",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of the SAPUI5 application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin role for managing the SAPUI5 application"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Admintemp",
+      "description": "Administrator role template",
+      "scope-references": [
+        "$XSAPPNAME.Admin"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "AdminRoleCollection",
+      "description": "Role collection for administrators",
+      "role-template-references": [
+        "$XSAPPNAME.Admintemp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+<mvc:View
+    displayBlock="true"
+    controllerName="knpltsiiasfrontend.controller.List"
+    height="100%"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <f:DynamicPage
+        id="dynamicListPage"
+        toggleHeaderOnTitleClick="false"
+    >
+        <!-- DynamicPage Title for List-->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Users ({= ${USERS_DATA>/User/$count} ? ${USERS_DATA>/User/$count} : 0})" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Content for table List -->
+        <f:content>
+            <Table
+                id="usersTable"
+                mode="SingleSelectMaster"
+                itemPress="onListItemPress"
+                inset="false"
+                items="{
+                    path: 'USERS_DATA>/User',
+                    sorter: {
+                        path: 'ID'
+                    }
+                }"
+                class="sapFDynamicPageAlignContent"
+                width="auto"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <SearchField
+                            search="onSearch"
+                            width="17.5rem"
+                            liveChange="onLiveSearch"
+                            placeholder="Employee Name Or ID"
+                        />
+                        <OverflowToolbarButton
+                            icon="sap-icon://add-employee"
+                            type="Transparent"
+                            press="onAdd"
+                        />
+                        <OverflowToolbarButton
+                            icon="sap-icon://sort"
+                            type="Transparent"
+                            press="onSort"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="12em">
+                        <Text text="Name" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="ID" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation">
+                        <cells>
+                            <ObjectIdentifier
+                                title="{USERS_DATA>FIRST_NAME} {USERS_DATA>LAST_NAME}"
+                                text="{USERS_DATA>EMAIL}"
+                            />
+                            <Text text="{USERS_DATA>ID}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,148 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "knpltsiiasfrontend",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.15.2",
+      "toolsId": "7b090e8f-a9f6-4f8e-aad0-4d90282353ec"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/tsi/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.129.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f" : {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "knpltsiiasfrontend.i18n.i18n"
+        }
+      },
+      "USERS_DATA": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type" : "View",
+        "viewType": "XML",
+        "path": "knpltsiiasfrontend.view",
+        "transition": "slide",
+        "controlId": "fcl",
+        "bypassed": {},
+        "async": true
+
+      },
+      "routes": [
+        {
+          "pattern": ":layout:",
+					"name": "list",
+					"target": [
+						"list"
+					]
+        },
+        {
+					"pattern": "detail/{userID}/{layout}",
+					"name": "detail",
+					"target": [
+						"list",
+						"detail"
+					]
+				},
+        {
+					"pattern": "detailGroup/{userID}/{groups}/{layout}",
+					"name": "detailGroup",
+					"target": [
+						"list",
+						"detail",
+						"detailGroup"
+					]
+				}
+      ],
+      "targets": {
+        "list": {
+					"name": "List",
+					"controlAggregation": "beginColumnPages"
+				},
+        "detail": {
+					"name": "Detail",
+					"controlAggregation": "midColumnPages"
+				},
+        "detailGroup": {
+					"name": "Groups",
+					"controlAggregation": "endColumnPages"
+				}
+      }
+    },
+    "rootView": {
+      "viewName": "knpltsiiasfrontend.view.FlexibleColumnLayout",
+      "type": "XML",
+      "async": true,
+      "id": "fcl"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "knpltsiiasfrontend"
+  }
+}

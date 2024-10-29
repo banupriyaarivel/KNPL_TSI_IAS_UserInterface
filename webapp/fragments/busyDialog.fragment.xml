@@ -1,0 +1,8 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<BusyDialog
+		title="Registering..."
+		text="Registering New User"
+		close="onDialogClosed" />
+</core:FragmentDefinition>

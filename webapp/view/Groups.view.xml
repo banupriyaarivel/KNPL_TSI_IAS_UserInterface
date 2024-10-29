@@ -1,0 +1,55 @@
+<mvc:View
+    displayBlock="true"
+    controllerName="knpltsiiasfrontend.controller.Groups"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.f"
+    xmlns:m="sap.m"
+>
+<!-- User sales group Dynamic page -->
+    <DynamicPage toggleHeaderOnTitleClick="false">
+    <!-- DynamicPage for Title -->
+        <title>
+            <DynamicPageTitle>
+                <heading>
+                    <m:FlexBox
+                        wrap="Wrap"
+                        fitContainer="true"
+                        alignItems="Center"
+                    >
+                        <m:Title
+                            text="Sales Groups"
+                            wrapping="true"
+                            class="sapUiTinyMarginEnd"
+                        />
+                    </m:FlexBox>
+                </heading>
+
+                
+            </DynamicPageTitle>
+        </title>
+
+<!-- DynamicPage for Content for Groups List -->
+        <content>
+            <m:Text
+                text="{USERS_DATA>FIRST_NAME} {USERS_DATA>LAST_NAME}"
+                class="sapUiSmallMarginBottom"
+                wrapping="false"
+                textAlign="Center"
+            />
+            <m:List
+                id="salesGroupsList"
+                items="{path: 'USERS_DATA>SALES_GROUPS'}"
+                mode="SingleSelectMaster"
+            >
+                <m:items>
+                    <m:StandardListItem
+                        title="{USERS_DATA>SALES_GROUP}"
+                        info="{= parseInt(${USERS_DATA>IS_ARCHIVED}, 10) === 1 ? 'Archived' : 'Not Archived'}"
+                        infoState="{path: 'USERS_DATA>IS_ARCHIVED', formatter: '.formatter.statusState'}"
+                    />
+                </m:items>
+            </m:List>
+        </content>
+    </DynamicPage>
+</mvc:View>
